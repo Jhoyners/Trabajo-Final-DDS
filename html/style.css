@@ -5,7 +5,7 @@ body{
     padding-top: 15px;
 
     /* este es el background en degrade, se encuentran en uiGradients */
-    background: #fcc5fc;
+    background: #ffe1fe;
     background: -webkit-linear-gradient(to right, #fcc5fc, #fcc5fc);
     background: linear-gradient(to right, #fcc5fc, #fcc5fc);
 }
