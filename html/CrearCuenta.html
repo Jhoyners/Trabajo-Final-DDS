@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- aqui estas los links de los otros html -->
+    <link rel="stylesheet" href="http://127.0.0.1:5500/IniciarSesion.html">
+    <link rel="stylesheet" href="http://127.0.0.1:5500/Retiros.html">
+    <link rel="stylesheet" href="http://127.0.0.1:5500/Quejas.html">
+    <!-- aqui esta el link del css -->
+    <link rel="stylesheet" href="style.css">
+    <!-- link bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- java script bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <title>Crear Una Cuenta</title>
+</head>
+
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="https://www.nequi.com.co/">NEQUI</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link" href="http://127.0.0.1:5500/IniciarSesion.html">Inicio</a>
+          <a class="nav-link" href="http://127.0.0.1:5500/Retiros.html">Retiros</a>
+          <a class="nav-link" href="http://127.0.0.1:5500/Quejas.html">Quejas</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+    <!-- Aqui esta todo el cuerpo de "crear cuenta" -->
+    <section id="cuerpo">
+      <div class="container">
+
+        <!-------------------  Titulo  --------------->
+        <h4 class="text-center">CREAR TU CUENTA</h4>
+        <p>Para poder crear una cuenta es necesario que completes este formulario:</p>
+
+        <!-------------------  Nombre --------------->
+        <label for="Nombre" class="form-label">Nombre:</label>
+        <input type="text" id="Nombre" class="form-control" aria-describedby="...">
+        <div id="passwordHelpBlock" class="form-text">
+          Por favor digite su Nombre.
+        </div>
+          <br>
+
+        <!-------------------  Apellido --------------->
+        <label for="Apellido" class="form-label">Apellido:</label>
+        <input type="text" id="Apellido" class="form-control" aria-describedby="...">
+        <div id="passwordHelpBlock" class="form-text">
+          Por favor digite su Apellido.
+        </div>
+          <br>
+
+        <!-------------------  Numero de cuenta --------------->
+        <label for="Cedula" class="form-label">Cedula de Ciudadania:</label>
+        <input type="text" id="Cedula" class="form-control" aria-describedby="...">
+        <div id="passwordHelpBlock" class="form-text">
+          Por favor digite su Cedula de Ciudadania.
+        </div>
+          <br>
+
+        <!-------------------  PIN  --------------->
+        <label for="inputPassword5" class="form-label">Digite su PIN:</label>
+        <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+        <div id="passwordHelpBlock" class="form-text">
+          Tu Pin debera tener un total de 10 digitos. Te recomendamos no usar un numero que ya hayas registrado en algun otro sitio previamente.
+        </div>
+          <br>
+        <!-------------------  confirmar PIN  --------------->
+        <label for="PIN" class="form-label">Confirmar PIN:</label>
+        <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+        <div id="passwordHelpBlock" class="form-text">
+          Por favor digite su PIN nuevamente.
+        </div>
+        <br>
+        <!-------------------  EMAIL  --------------->
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" id="email" class="form-control" aria-describedby="emailplaceholder">
+        <div id="emailplaceholder" class="form-text">
+          Por favor digite un Email valido y activo, ya que alli te llegaran todas las confirmaciones de tus movimientos.
+        </div>
+        <br>
+        <!-------------------  Confirmar EMAIL  --------------->
+        <label for="email" class="form-label">Confirmar Email:</label>
+        <input type="email" id="email" class="form-control" aria-describedby="emailplaceholder">
+        <div id="emailplaceholder" class="form-text">
+          Por favor digite si Email nuevamente.
+        </div>
+        <br>
+
+        <p>Una vez completada esta informacion solo resta darle click al boton de crear Cuenta.</p>
+      
+        <button>Crear Cuenta</button>
+        <button>Actualizar</button>
+        <Button>Borrar</Button>
+        <br>
+        <br>
+
+        <p>Tu numero de cuenta te llegara a tu correo, por lo que te recomendamos estar pendiente.</p>
+
+        <a href="http://127.0.0.1:5500/IniciarSesion.html">¿Ya tienes una cuenta?</a>
+      </div>
+    </section>
+
+</body>
+
+<footer>
+  <p>Todos los derechos reservados © 2024 NEQUI</p>
+  <p>Si tienes alguna duda, queja o problema por favor dirigete a la seccion de quejas que se encuentra en la esquina superior derecha.</p>
+  <h6>Gracias por preferir a NEQUI😊</h6>
+</footer>
+
+</html>

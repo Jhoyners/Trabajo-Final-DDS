@@ -1,0 +1,73 @@
+body{
+    padding-left: 170px;
+    padding-right: 170px;
+    padding-bottom: 10px;
+    padding-top: 15px;
+
+    /* este es el background en degrade, se encuentran en uiGradients */
+    background: #41295a;
+    background: -webkit-linear-gradient(to right, #2F0743, #41295a);
+    background: linear-gradient(to right, #2F0743, #41295a);
+}
+
+#cuerpo{
+    width: 100%;
+    height: 100%;
+    border-color: rgb(0, 0, 0);
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 5px;
+    font-size: 24px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: rgb(248, 241, 255);
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.container{
+    font-size: 14px;
+}
+
+h1{
+    text-align: center;
+    font-size: 27px;
+}
+
+button{
+    width: 120px;
+    height: 30px;
+    background: #41295a;
+    border-radius: 3px;
+    border-color: #41295a;;
+    border-width: 2px;
+    border-style: solid;
+    font-size: 16px;
+    cursor: pointer;
+    color: azure;
+    margin-bottom: 10px;
+}
+
+
+.navbar {
+    background-color: rgb(63, 5, 120) !important;
+    border-radius: 3px;
+    border-color: rgb(44, 0, 87);
+    border-width: 2px;
+    border-style: solid;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+
+
+footer{
+    background-color: rgb(248, 241, 255);
+    border-radius: 3px;
+    border-color: rgb(0, 0, 0);
+    border-width: 2px;
+    border-style: solid;
+    padding: 10px;
+    margin-top: 20px;
+    position: relative;
+}

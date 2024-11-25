@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- aqui estas los links de los otros html -->
+    <link rel="stylesheet" href="http://127.0.0.1:5500/IniciarSesion.html">
+    <link rel="stylesheet" href="http://127.0.0.1:5500/Quejas.html">
+    <link rel="stylesheet" href="http://127.0.0.1:5500/CrearCuenta.html">
+    <!-- aqui esta el link del css -->
+    <link rel="stylesheet" href="style.css">
+    <!-- link bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- java script bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <title>RETIROS</title>
+</head>
+
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="https://www.nequi.com.co/">NEQUI</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-nav ms-auto">
+              <a class="nav-link" href="http://127.0.0.1:5500/IniciarSesion.html">Inicio</a>
+              <a class="nav-link" href="http://127.0.0.1:5500/CrearCuenta.html">Crear Cuenta</a>
+              <a class="nav-link" href="http://127.0.0.1:5500/Quejas.html">Quejas</a>
+            </div>
+          </div>
+        </div>
+    </nav>
+
+
+    <section id="cuerpo">
+        <div class="container">
+  
+          <!-------------------  Titulo  --------------->
+          <h4 class="text-center">RETIROS</h4>
+          <p>Para realizar un retiro es muy sencillo, por favor brindanos la siguiente informacion:</p>
+  
+          <!-------------------  Numero de cuenta --------------->
+          <label for="Cuenta" class="form-label">Numero de Cuenta:</label>
+          <input type="number" id="cuenta" class="form-control" aria-describedby="...">
+          <div id="passwordHelpBlock" class="form-text">
+            Por favor digite su numero de cuenta.
+          </div>
+            <br>
+
+          <!-------------------  PIN  --------------->
+          <label for="inputPassword5" class="form-label">Digite su PIN:</label>
+          <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+          <div id="passwordHelpBlock" class="form-text">
+            Asegurate de que nadie pueda ver tu PIN.
+          </div>
+            <br>
+  
+          <!-------------------  PIN  --------------->
+          <label for="Valor" class="form-label">Valor</label>
+          <input type="number" id="Valor" class="form-control" aria-describedby="...">
+          <div id="passwordHelpBlock" class="form-text">
+            Por favor digite el valor del retiro.
+          </div>
+            <br>
+
+          <p>Te recomendamos no brindarle esta informacion a terceros ya que podria afectar la seguridad de tu cuenta e incluso la tuya.</p>
+        
+          <button>Retirar Dinero</button>
+          <Button>Cancelar</Button>
+          <br><br>
+          <br>
+
+          <h5>Si el retiro que realizaste supera los 2 millones de pesos, puedes pedir una asistencia especial.</h5>
+          <p>Para que podamos realizar esta asistencia solo necesitamos tu telefono y tu direccion actual.</p>
+
+          <label for="Cuenta" class="form-label">Numero de Telefono:</label>
+          <input type="number" id="cuenta" class="form-control" aria-describedby="...">
+          <div id="passwordHelpBlock" class="form-text">
+            Por favor digite su numero de telefono.
+          </div>
+            <br>
+
+            <label for="Cuenta" class="form-label">Su direccion actual:</label>
+            <input type="address" id="cuenta" class="form-control" aria-describedby="...">
+            <div id="passwordHelpBlock" class="form-text">
+              Por favor digite su direccion actual. Una vez ingreasa es necesario que permanezca allí el tiempo que nuestro operar le indique.
+            </div>
+              <br>
+
+              <button>Pedir Asistencia</button>
+              <br><br>
+          <!-------------------  Enlace para actualizar  --------------->
+          <p>Si deseas actualizar tu informacion es necesario que te dirijas a la seccion "crear tu cuenta".</p>
+          <p>Tendras que rellenar la informacion nuevamente con los datos actualizados y darle click al boton "Actualizar".</p>
+          <a href="http://127.0.0.1:5500/Quejas.html">¿Tienes algun inconveniente con la aplicacion o retiro?</a>
+        </div>
+    </section>
+</body>
+
+<footer>
+    <p>Todos los derechos reservados © 2024 NEQUI</p>
+    <p>Si tienes alguna duda, queja o problema por favor dirigete a la seccion de quejas que se encuentra en la esquina superior derecha.</p>
+    <h6>Gracias por preferir a NEQUI😊</h6>
+</footer>
+
+</html>
