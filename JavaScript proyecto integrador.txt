@@ -1,0 +1,225 @@
+package nequiproyectointegrador;
+
+import java.util.Scanner;
+
+public class NequiProyectoIntegrador {
+    
+    // Atributos
+    static String[] usuarios = new String[10];
+    static int[] contraseñas = new int[10];
+    static double[] saldos = new double[10];
+    static int contadorCuentas = 0; // Para llevar el control del número de cuentas
+    static double[] ingresos = new double[10]; // Registro de recargas realizadas
+    static Scanner entrada = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int opcion;
+
+        do {
+            System.out.println("\n--- MENU PRINCIPAL ---");
+      
+             System.out.print("\n --senior usuario seleccione una de las siguientes opciones: ");
+             
+             
+            System.out.println("1. Usuario");
+            System.out.println("2. Administrador");
+            System.out.println("3. Salir");
+           
+            opcion = entrada.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    menuUsuario();
+                    break;
+                case 2:
+                    menuAdministrador();
+                    break;
+                case 3:
+                    System.out.println("Gracias por usar Nequi! Hasta pronto.");
+                    break;
+                default:
+                    System.out.println("Opción invalida. Intente nuevamente.");
+            }
+        } while (opcion != 3);
+    }
+
+    
+    public static void menuUsuario() {
+        System.out.println("\n--- MODO USUARIO ---");
+        System.out.println("1. Registrar cuenta");
+        System.out.println("2. Iniciar sesion");
+        System.out.print("Seleccione una opcion: ");
+        int opcion = entrada.nextInt();
+
+        switch (opcion) {
+            case 1:
+                registrarCuenta();
+                break;
+            case 2:
+                iniciarSesion();
+                break;
+            default:
+                System.out.println("Opcion invalida.");
+        }
+    }
+
+    public static void iniciarSesion() {
+        System.out.print("Ingrese su nombre de usuario: ");
+        entrada.nextLine(); 
+        String nombreUsuario = entrada.nextLine();
+        System.out.print("Ingrese su contrasenia: ");
+        int contraseña = entrada.nextInt();
+
+        int indice = buscarUsuario(nombreUsuario, contraseña);
+        if (indice == -1) {
+            System.out.println("Usuario o contrasenia incorrectos.");
+            return;
+        }
+
+        System.out.println("\n--- Opciones de Cliente ---");
+        System.out.println("1. Consultar saldo");
+        System.out.println("2. Retirar dinero");
+        System.out.println("3. Recargar saldo");
+        System.out.print("Seleccione una opcion: ");
+        int opcion = entrada.nextInt();
+
+        switch (opcion) {
+            case 1:
+                consultarSaldo(indice);
+                break;
+            case 2:
+                retirarDinero(indice);
+                break;
+            case 3:
+                recargarSaldo(indice);
+                break;
+            default:
+                System.out.println("Opcion invalida.");
+        }
+    }
+
+    
+    public static void menuAdministrador() {
+        System.out.println("\n--- sesion ADMINISTRADOR ---");
+        System.out.println("1. Consultar ingresos totales");
+        System.out.println("2. Eliminar cuenta");
+        System.out.println("3. Mostrar todas las cuentas");
+        System.out.print("Seleccione una opcion: ");
+        int opcion = entrada.nextInt();
+
+        switch (opcion) {
+            case 1:
+                consultarIngresos();
+                break;
+            case 2:
+                eliminarCuenta();
+                break;
+            case 3:
+                mostrarCuentas();
+                break;
+            default:
+                System.out.println("Opcion invalida.");
+        }
+    }
+
+    
+    public static void consultarSaldo(int indice) {
+        System.out.println("Su saldo actual es: " + saldos[indice] + " pesos.");
+    }
+
+    public static void retirarDinero(int indice) {
+        System.out.print("Ingrese la cantidad a retirar: ");
+        double retiro = entrada.nextDouble();
+        if (retiro > saldos[indice]) {
+            System.out.println("Fondos insuficientes.");
+        } else {
+            saldos[indice] -= retiro;
+            System.out.println("Retiro exitoso. Nuevo saldo: " + saldos[indice] + " pesos.");
+        }
+    }
+
+    public static void recargarSaldo(int indice) {
+        System.out.print("Ingrese la cantidad a recargar: ");
+        double recarga = entrada.nextDouble();
+        if (recarga > 0) {
+            saldos[indice] += recarga;
+            ingresos[indice] += recarga; 
+            System.out.println("Recarga exitosa. Nuevo saldo: " + saldos[indice] + " pesos.");
+        } else {
+            System.out.println("La cantidad debe ser positiva.");
+        }
+    }
+
+    
+    public static void consultarIngresos() {
+        double totalIngresos = 0;
+        for (double ingreso : ingresos) {
+            totalIngresos += ingreso;
+        }
+        System.out.println("El total de ingresos por recargas es: " + totalIngresos + " pesos.");
+    }
+
+    public static void eliminarCuenta() {
+        System.out.println("ingrese el nombre del usuario que quiere eliminar");
+        entrada.nextLine(); 
+        String nombreUsuario = entrada.nextLine();
+
+        for (int i = 0; i < contadorCuentas; i++) {
+            if (usuarios[i].equals(nombreUsuario)) {
+                
+                for (int j = i; j < contadorCuentas - 1; j++) {
+                    usuarios[j] = usuarios[j + 1];
+                    contraseñas[j] = contraseñas[j + 1];
+                    saldos[j] = saldos[j + 1];
+                    ingresos[j] = ingresos[j + 1];
+                }
+                contadorCuentas--;
+                System.out.println("la cuenta fue eliminada con exito");
+                return;
+            }
+        }
+        System.out.println("no se encontro la cuenta.");
+    }
+
+    public static void mostrarCuentas() {
+        if (contadorCuentas == 0) {
+            System.out.println("Hasta el momento no hay cuentas regitradas");
+        } else {
+            System.out.println("estas son las cuentas registradas");
+            for (int i = 0; i < contadorCuentas; i++) {
+                System.out.println("Usuario: " + usuarios[i] + " - Saldo: " + saldos[i]);
+            }
+        }
+    }
+
+    
+    public static void registrarCuenta() {
+        if (contadorCuentas >= usuarios.length) {
+            System.out.println("No se pueden registrar mas cuentas. Espacio insuficiente.");
+            return;
+        }
+
+        System.out.print("Ingrese el nombre del usuario: ");
+        entrada.nextLine(); 
+        String nombreUsuario = entrada.nextLine();
+        System.out.print("Ingrese la contraseña: ");
+        int contraseña = entrada.nextInt();
+        System.out.print("Ingrese el saldo inicial: ");
+        double saldoInicial = entrada.nextDouble();
+
+        usuarios[contadorCuentas] = nombreUsuario;
+        contraseñas[contadorCuentas] = contraseña;
+        saldos[contadorCuentas] = saldoInicial;
+        contadorCuentas++;
+        System.out.println("¡Cuenta registrada con exito!");
+    }
+
+    public static int buscarUsuario(String nombreUsuario, int contraseña) {
+        for (int i = 0; i < contadorCuentas; i++) {
+            if (usuarios[i].equals(nombreUsuario) && contraseñas[i] == contraseña) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
