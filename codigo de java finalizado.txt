@@ -1,0 +1,292 @@
+package nequiproyectointegrador;
+
+import java.util.Scanner;
+
+public class NequiProyectoIntegrador {
+    
+    // Atributos
+    static String[] usuarios = new String[10];
+    static int[] contraseñas = new int[10];
+    static double[] saldos = new double[10];
+    static int contadorCuentas = 0; // Para llevar el control del número de cuentas
+    static double[] ingresos = new double[10]; // Registro de recargas realizadas
+    static double[] retiros = new double[10]; // Registro de retiros realizados
+    static String[] nombresRetiros = new String[10]; // Almacena el nombre del usuario que realizó el retiro
+    static int contadorRetiros = 0; // Contador de retiros realizados
+    static Scanner entrada = new Scanner(System.in);
+
+    // Variables para el administrador
+    static final String ADMIN_USUARIO = "admin";
+    static final int ADMIN_CONTRASEÑA = 1234;
+
+    public static void main(String[] args) {
+        int opcion;
+
+        do {
+            System.out.println("\n--- MENU PRINCIPAL ---");
+            System.out.print("\n --senior usuario seleccione una de las siguientes opciones: ");
+            System.out.println("1. Usuario");
+            System.out.println("2. Administrador");
+            System.out.println("3. Salir");
+            opcion = entrada.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    menuUsuario();
+                    break;
+                case 2:
+                    menuAdministrador();
+                    break;
+                case 3:
+                    System.out.println("Gracias por usar Nequi! Hasta pronto.");
+                    break;
+                default:
+                    System.out.println("Opcion invalida. Intente nuevamente.");
+            }
+        } while (opcion != 3);
+    }
+
+    // Modo Usuario
+    public static void menuUsuario() {
+        System.out.println("\n--- MODO USUARIO ---");
+        System.out.println("1. Registrar cuenta");
+        System.out.println("2. Iniciar sesion");
+        System.out.println("3. Salir");
+        System.out.print("Seleccione una opcion: ");
+        int opcion = entrada.nextInt();
+
+        switch (opcion) {
+            case 1:
+                registrarCuenta();
+                break;
+            case 2:
+                iniciarSesion();  
+                break;
+            case 3:
+                System.out.println("Gracias por usar Nequi! Hasta pronto.");
+                break;
+            default:
+                System.out.println("Opcion invalida.");
+        }
+    }
+
+    // Iniciar sesión de Usuario
+    public static void iniciarSesion() {
+        System.out.print("Ingrese su nombre de usuario: ");
+        entrada.nextLine();  // Limpiar buffer
+        String nombreUsuario = entrada.nextLine();
+        System.out.print("Ingrese su contrasenia: ");
+        int contraseña = entrada.nextInt();
+
+        int indice = buscarUsuario(nombreUsuario, contraseña);
+        if (indice == -1) {
+            System.out.println("Usuario o contrasenia incorrectos.");
+            return;
+        }
+
+        // Menú de Usuario
+        int opcion;
+        do {
+            System.out.println("\n--- Opciones de Cliente ---");
+            System.out.println("1. Consultar saldo");
+            System.out.println("2. Retirar dinero");
+            System.out.println("3. Recargar saldo");
+            System.out.println("4. Salir");
+            System.out.print("Seleccione una opcion: ");
+            opcion = entrada.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    consultarSaldo(indice);
+                    break;
+                case 2:
+                    retirarDinero(indice, nombreUsuario);  // Pasamos el nombre del usuario al retirar
+                    break;
+                case 3:
+                    recargarSaldo(indice);
+                    break;
+                case 4:
+                    System.out.println("Saliendo del sistema...");
+                    break;
+                default:
+                    System.out.println("Opcion invalida.");
+            }
+        } while (opcion != 4);
+    }
+
+    // Menú del Administrador
+    public static void menuAdministrador() {
+        // Verificar las credenciales del administrador
+        System.out.print("Ingrese el nombre de usuario del administrador: ");
+        entrada.nextLine(); // Limpiar buffer
+        String usuarioAdmin = entrada.nextLine();
+        System.out.print("Ingrese la contrasenia del administrador: ");
+        int contrasenaAdmin = entrada.nextInt();
+
+        if (usuarioAdmin.equals(ADMIN_USUARIO) && contrasenaAdmin == ADMIN_CONTRASEÑA) {
+            int opcion;
+            do {
+                System.out.println("\n--- Menu ADMINISTRADOR ---");
+                System.out.println("1. Consultar ingresos totales");
+                System.out.println("2. Eliminar cuenta");
+                System.out.println("3. Mostrar todas las cuentas");
+                System.out.println("4. Ver todos los retiros realizados");
+                System.out.println("5. Ver cantidad total de retiros");
+                System.out.println("6. Salir al menu principal");
+                System.out.print("Seleccione una opcion: ");
+                opcion = entrada.nextInt();
+
+                switch (opcion) {
+                    case 1:
+                        consultarIngresos();
+                        break;
+                    case 2:
+                        eliminarCuenta();
+                        break;
+                    case 3:
+                        mostrarCuentas();
+                        break;
+                    case 4:
+                        mostrarRetiros();
+                        break;
+                    case 5:
+                        cantidadRetiros();
+                        break;
+                    case 6:
+                        System.out.println("Saliendo al menu principal...");
+                        return;  // Sale al menú principal
+                    default:
+                        System.out.println("Opcion invalida.");
+                }
+            } while (true); // El administrador puede seguir navegando hasta que decida salir
+        } else {
+            System.out.println("Credenciales incorrectas.");
+        }
+    }
+
+    // Consultar saldo
+    public static void consultarSaldo(int indice) {
+        System.out.println("Su saldo actual es: " + saldos[indice] + " pesos.");
+    }
+
+    // Retirar dinero
+    public static void retirarDinero(int indice, String nombreUsuario) {
+        System.out.print("Ingrese la cantidad a retirar: ");
+        double retiro = entrada.nextDouble();
+        if (retiro > saldos[indice]) {
+            System.out.println("Fondos insuficientes.");
+        } else {
+            saldos[indice] -= retiro;
+            retiros[contadorRetiros] = retiro; // Registrar el retiro
+            nombresRetiros[contadorRetiros] = nombreUsuario; // Registrar el nombre del usuario que realizó el retiro
+            contadorRetiros++;
+            System.out.println("Retiro exitoso. Nuevo saldo: " + saldos[indice] + " pesos.");
+        }
+    }
+
+    // Recargar saldo
+    public static void recargarSaldo(int indice) {
+        System.out.print("Ingrese la cantidad a recargar: ");
+        double recarga = entrada.nextDouble();
+        if (recarga > 0) {
+            saldos[indice] += recarga;
+            ingresos[indice] += recarga;
+            System.out.println("Recarga exitosa. Nuevo saldo: " + saldos[indice] + " pesos.");
+        } else {
+            System.out.println("La cantidad debe ser positiva.");
+        }
+    }
+
+    // Mostrar retiros realizados
+    public static void mostrarRetiros() {
+        if (contadorRetiros == 0) {
+            System.out.println("Aun no se han realizado retiros.");
+        } else {
+            System.out.println("Retiros realizados:");
+            for (int i = 0; i < contadorRetiros; i++) {
+                System.out.println("Usuario: " + nombresRetiros[i] + " - Retiro #" + (i+1) + ": " + retiros[i] + " pesos.");
+            }
+        }
+    }
+
+    // Mostrar cantidad total de retiros
+    public static void cantidadRetiros() {
+        System.out.println("Cantidad total de retiros realizados: " + contadorRetiros);
+    }
+
+    // Consultar ingresos
+    public static void consultarIngresos() {
+        double totalIngresos = 0;
+        for (double ingreso : ingresos) {
+            totalIngresos += ingreso;
+        }
+        System.out.println("El total de ingresos por recargas es: " + totalIngresos + " pesos.");
+    }
+
+    // Eliminar cuenta
+    public static void eliminarCuenta() {
+        System.out.println("Ingrese el nombre del usuario que quiere eliminar");
+        entrada.nextLine(); 
+        String nombreUsuario = entrada.nextLine();
+
+        for (int i = 0; i < contadorCuentas; i++) {
+            if (usuarios[i].equals(nombreUsuario)) {
+                for (int j = i; j < contadorCuentas - 1; j++) {
+                    usuarios[j] = usuarios[j + 1];
+                    contraseñas[j] = contraseñas[j + 1];
+                    saldos[j] = saldos[j + 1];
+                    ingresos[j] = ingresos[j + 1];
+                }
+                contadorCuentas--;
+                System.out.println("La cuenta fue eliminada con exito.");
+                return;
+            }
+        }
+        System.out.println("No se encontro la cuenta.");
+    }
+
+    // Mostrar cuentas registradas
+    public static void mostrarCuentas() {
+        if (contadorCuentas == 0) {
+            System.out.println("No hay cuentas registradas.");
+        } else {
+            System.out.println("Cuentas registradas:");
+            for (int i = 0; i < contadorCuentas; i++) {
+                System.out.println("Usuario: " + usuarios[i] + " - Saldo: " + saldos[i]);
+            }
+        }
+    }
+
+    // Registrar cuenta
+    public static void registrarCuenta() {
+        if (contadorCuentas >= usuarios.length) {
+            System.out.println("No se pueden registrar mas cuentas. Espacio insuficiente.");
+            return;
+        }
+
+        System.out.print("Ingrese el nombre del usuario: ");
+        entrada.nextLine(); 
+        String nombreUsuario = entrada.nextLine();
+        System.out.print("Ingrese la contrasenia: ");
+        int contraseña = entrada.nextInt();
+        System.out.print("Ingrese el saldo inicial: ");
+        double saldoInicial = entrada.nextDouble();
+
+        usuarios[contadorCuentas] = nombreUsuario;
+        contraseñas[contadorCuentas] = contraseña;
+        saldos[contadorCuentas] = saldoInicial;
+        contadorCuentas++;
+        System.out.println("¡Cuenta registrada con exito!");
+    }
+
+    // Buscar usuario
+    public static int buscarUsuario(String nombreUsuario, int contraseña) {
+        for (int i = 0; i < contadorCuentas; i++) {
+            if (usuarios[i].equals(nombreUsuario) && contraseñas[i] == contraseña) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+
